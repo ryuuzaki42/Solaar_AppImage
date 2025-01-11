@@ -1,0 +1,114 @@
+name: Create new realease
+
+on:
+  push:
+    branches:
+      - "**"
+    tags:
+      - "!**"
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-20.04
+    #runs-on: ubuntu-latest
+    # ImportError: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by 
+    # /tmp/.mount_FFsub*/opt/python3.12/lib/python3.12/site-packages/_webrtcvad.cpython-312-x86_64-linux-gnu.so)
+    # ubuntu-latest or 22.04 will require GLIBC_2.34
+
+    steps:
+    - uses: actions/checkout@main
+    - name: Install fuse and libfuse2
+      run: sudo apt install fuse libfuse2
+
+    - name: Get appimagetool
+      run: |
+        set -x
+        #wget https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-x86_64.AppImage
+        version_go_appimage=$(wget -q -O - https://api.github.com/repos/probonopd/go-appimage/releases | grep "\"name.*appimagetool-.*-x86_64.AppImage\"" | head -n 1 | cut -d '-' -f2)
+        echo "version_go_appimage: $version_go_appimage"
+
+        wget -q "https://github.com/probonopd/go-appimage/releases/download/continuous/appimagetool-$version_go_appimage-x86_64.AppImage" -O appimagetool-x86_64.AppImage
+        chmod +x appimagetool-x86_64.AppImage
+        pwd; ls -lah
+
+    - name: Get Pyhton AppImage
+      run: |
+        set -x
+        #wget https://github.com/niess/python-appimage/releases/download/python3.11/python3.11.4-cp311-cp311-manylinux_2_28_x86_64.AppImage
+        wget https://github.com/niess/python-appimage/releases/download/python3.12/python3.12.8-cp312-cp312-manylinux_2_28_x86_64.AppImage
+        fileName=$(ls python3*.AppImage)
+        chmod +x "$fileName"
+        ./"$fileName" --appimage-extract
+        ls -lah
+
+    - name: Install FFsubsync and update pip
+      run: |
+        set -x
+        cd squashfs-root/opt/python3*/bin/
+        pwd; ls -lah
+
+        ./pip3.* install ffsubsync
+        ./python3.* -m pip install --upgrade pip
+
+    - name: Make AppImage
+      run: |
+        version_FFsubsync="0.4.27"
+
+        set -x
+        cd squashfs-root/
+        pwd; ls -lah
+
+        #rm -v python* .DirIcon AppRun
+        rm -v .DirIcon AppRun
+
+        #find . | grep ".png"
+        #find . | grep ".svg"
+        mv python.png FFsubsync.png
+
+        #find . | grep ".desktop"
+        mv python*.desktop FFsubsync.desktop
+        cat FFsubsync.desktop
+
+        #sed -i "s/Name=.*/Name=FFsubsync-$version_FFsubsync/" FFsubsync.desktop
+        sed -i "s/Name=.*/Name=FFsubsync/" FFsubsync.desktop
+        sed -i "s/Icon=python/Icon=FFsubsync/" FFsubsync.desktop
+        cat FFsubsync.desktop
+
+        pwd; ls -lah
+
+        cd ../
+        mv AppRun squashfs-root/
+
+        mv README.md squashfs-root/
+        ls -lah squashfs-root/
+
+        # Wrong permissions on AppDir, please set it to 0755 and try again
+        chmod 0755 squashfs-root/
+
+        #ARCH=x86_64 ./appimagetool-x86_64.AppImage squashfs-root/
+        ARCH=x86_64 VERSION="${version_FFsubsync}-1_JB" ./appimagetool-x86_64.AppImage squashfs-root/
+        pwd; ls -lah
+
+        fileName=$(ls FFsubsync*.AppImage)
+        echo "fileName: $fileName"
+        md5sum "$fileName" > "${fileName}.md5"
+        pwd; ls -lah
+
+    # Build - Error: Resource not accessible by integration
+    # Change Settings -> Actions -> General -> Workflow Permissions to allow read and write:
+    # https://github.com/actions/first-interaction/issues/10#issuecomment-1506118886
+
+    # https://github.com/marketplace/actions/upload-to-github-release
+    - uses: xresloader/upload-to-github-release@main
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          file: "FFsubsync*.AppImage; FFsubsync*.zsync; FFsubsync*.md5"
+          #delete_file: "random-name-*.txt;random-*.txt"
+          release_id: ${{ steps.create_release.outputs.id }}
+          #overwrite: true
+          verbose: true
+          #tags: true
+          draft: false
+          default_release_name: "FFsubsync V in AppImage"
