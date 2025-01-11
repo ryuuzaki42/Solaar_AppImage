@@ -53,8 +53,9 @@ jobs:
         #./pip3.* install dbus-next #dbus-python
         #sudo apt install libdbus-1-3 libdbus-1-dev
         #./pip3.* install dbus-python==1.2.4
-        ./pip3.* install pydbus
+        #./pip3.* install pydbus
         #./pip3.* install dbus-python3
+        sudo apt install dbus-python
 
         ./pip3.* install Solaar
         ./python3.* -m pip install --upgrade pip
