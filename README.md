@@ -3,15 +3,10 @@
 
 ## Repository: https://github.com/ryuuzaki42/Solaar_AppImage
 
-## Usage
-```
-# Base:
-    ./FFsubsync*_JB.AppImage ffsubsync -v
-```
+    Need to be run as root to change Logitech Unifying 
 
 ---
 https://github.com/pwr-Solaar/Solaar
-
 
 https://pypi.org/project/Solaar/
 
