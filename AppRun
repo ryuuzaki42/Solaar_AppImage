@@ -1,8 +1,5 @@
 #!/bin/bash
-echo -e "\nRunning ffsubsync: $@"
 HERE="$(dirname "$(readlink -f "${0}")")"
 
-count_Paramets=$#
-echo -e "\ncount_Paramets: $count_Paramets"
-all_Parameters=$@
-echo -e "all_Parameters: $all_Parameters\n"
+cd "$HERE"/opt/python3.*/bin/
+../python3.* ./solaar
