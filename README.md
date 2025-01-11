@@ -1,7 +1,7 @@
 
-# FFsubsync_AppImage
+# Solaar_AppImage
 
-## Repository: https://github.com/ryuuzaki42/FFsubsync_AppImage
+## Repository: https://github.com/ryuuzaki42/Solaar_AppImage
 
 ## Usage
 ```
@@ -39,9 +39,10 @@
 ```
 
 ---
-https://github.com/smacke/ffsubsync
+https://github.com/pwr-Solaar/Solaar
 
-https://pypi.org/project/ffsubsync/
+
+https://pypi.org/project/Solaar/
 
 ---
-https://github.com/smacke/ffsubsync/tags
+https://github.com/pwr-Solaar/Solaar/releases
