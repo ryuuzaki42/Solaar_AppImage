@@ -10,8 +10,8 @@ on:
 jobs:
   build:
     name: Build
-    #runs-on: ubuntu-20.04
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+    #runs-on: ubuntu-latest
     # ImportError: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by
     # /tmp/.mount_FFsub*/opt/python3.12/lib/python3.12/site-packages/_webrtcvad.cpython-312-x86_64-linux-gnu.so)
     # ubuntu-latest or 22.04 will require GLIBC_2.34
@@ -36,8 +36,8 @@ jobs:
       run: |
         set -x
         #wget https://github.com/niess/python-appimage/releases/download/python3.11/python3.11.4-cp311-cp311-manylinux_2_28_x86_64.AppImage
-        #wget https://github.com/niess/python-appimage/releases/download/python3.12/python3.12.8-cp312-cp312-manylinux_2_28_x86_64.AppImage
-        wget https://github.com/niess/python-appimage/releases/download/python3.9/python3.9.21-cp39-cp39-manylinux_2_28_x86_64.AppImage
+        wget https://github.com/niess/python-appimage/releases/download/python3.12/python3.12.8-cp312-cp312-manylinux_2_28_x86_64.AppImage
+        #wget https://github.com/niess/python-appimage/releases/download/python3.9/python3.9.21-cp39-cp39-manylinux_2_28_x86_64.AppImage
 
         fileName=$(ls python3*.AppImage)
         chmod +x "$fileName"
@@ -49,6 +49,8 @@ jobs:
         set -x
         cd squashfs-root/opt/python3*/bin/
         pwd; ls -lah
+
+        ./pip3.* install dbus-python
 
         ./pip3.* install Solaar
         ./python3.* -m pip install --upgrade pip
