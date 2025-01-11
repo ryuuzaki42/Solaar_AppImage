@@ -50,7 +50,7 @@ jobs:
         cd squashfs-root/opt/python3*/bin/
         pwd; ls -lah
 
-        ./pip3.* install dbus-python
+        ./pip3.* install dbus-next #dbus-python
 
         ./pip3.* install Solaar
         ./python3.* -m pip install --upgrade pip
