@@ -12,7 +12,7 @@ jobs:
     name: Build
     runs-on: ubuntu-20.04
     #runs-on: ubuntu-latest
-    # ImportError: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by 
+    # ImportError: /lib64/libc.so.6: version `GLIBC_2.34' not found (required by
     # /tmp/.mount_FFsub*/opt/python3.12/lib/python3.12/site-packages/_webrtcvad.cpython-312-x86_64-linux-gnu.so)
     # ubuntu-latest or 22.04 will require GLIBC_2.34
 
@@ -42,18 +42,18 @@ jobs:
         ./"$fileName" --appimage-extract
         ls -lah
 
-    - name: Install FFsubsync and update pip
+    - name: Install Solaar and update pip
       run: |
         set -x
         cd squashfs-root/opt/python3*/bin/
         pwd; ls -lah
 
-        ./pip3.* install ffsubsync
+        ./pip3.* install Solaar
         ./python3.* -m pip install --upgrade pip
 
     - name: Make AppImage
       run: |
-        version_FFsubsync="0.4.27"
+        version_Solaar="0.4.27"
 
         set -x
         cd squashfs-root/
@@ -64,16 +64,16 @@ jobs:
 
         #find . | grep ".png"
         #find . | grep ".svg"
-        mv python.png FFsubsync.png
+        mv python.png Solaar.png
 
         #find . | grep ".desktop"
-        mv python*.desktop FFsubsync.desktop
-        cat FFsubsync.desktop
+        mv python*.desktop Solaar.desktop
+        cat Solaar.desktop
 
-        #sed -i "s/Name=.*/Name=FFsubsync-$version_FFsubsync/" FFsubsync.desktop
-        sed -i "s/Name=.*/Name=FFsubsync/" FFsubsync.desktop
-        sed -i "s/Icon=python/Icon=FFsubsync/" FFsubsync.desktop
-        cat FFsubsync.desktop
+        #sed -i "s/Name=.*/Name=Solaar-$version_Solaar/" Solaar.desktop
+        sed -i "s/Name=.*/Name=Solaar/" Solaar.desktop
+        sed -i "s/Icon=python/Icon=Solaar/" Solaar.desktop
+        cat Solaar.desktop
 
         pwd; ls -lah
 
@@ -87,10 +87,10 @@ jobs:
         chmod 0755 squashfs-root/
 
         #ARCH=x86_64 ./appimagetool-x86_64.AppImage squashfs-root/
-        ARCH=x86_64 VERSION="${version_FFsubsync}-1_JB" ./appimagetool-x86_64.AppImage squashfs-root/
+        ARCH=x86_64 VERSION="${version_Solaar}-1_JB" ./appimagetool-x86_64.AppImage squashfs-root/
         pwd; ls -lah
 
-        fileName=$(ls FFsubsync*.AppImage)
+        fileName=$(ls Solaar*.AppImage)
         echo "fileName: $fileName"
         md5sum "$fileName" > "${fileName}.md5"
         pwd; ls -lah
@@ -104,11 +104,11 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          file: "FFsubsync*.AppImage; FFsubsync*.zsync; FFsubsync*.md5"
+          file: "Solaar*.AppImage; Solaar*.zsync; Solaar*.md5"
           #delete_file: "random-name-*.txt;random-*.txt"
           release_id: ${{ steps.create_release.outputs.id }}
           #overwrite: true
           verbose: true
           #tags: true
           draft: false
-          default_release_name: "FFsubsync V in AppImage"
+          default_release_name: "Solaar V in AppImage"
