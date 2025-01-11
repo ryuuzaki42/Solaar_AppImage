@@ -50,11 +50,14 @@ jobs:
         pwd; ls -lah
 
         ./pip3.* install Solaar
+
+        ./pip3.* install typing_extensions
+
         ./python3.* -m pip install --upgrade pip
 
     - name: Make AppImage
       run: |
-        version_Solaar="0.4.27"
+        version_Solaar="1.1.14"
 
         set -x
         cd squashfs-root/
