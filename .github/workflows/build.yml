@@ -49,6 +49,9 @@ jobs:
         cd squashfs-root/opt/python3*/bin/
         pwd; ls -lah
 
+        # ERROR: Dependency "dbus-1" not found
+        sudo apt-get install libdbus-1-dev
+
         ./pip3.* install Solaar
 
         ./pip3.* install typing_extensions
