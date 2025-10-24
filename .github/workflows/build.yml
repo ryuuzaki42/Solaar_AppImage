@@ -52,6 +52,10 @@ jobs:
         # ERROR: Dependency "dbus-1" not found
         sudo apt-get install libdbus-1-dev
 
+        # ERROR: Dependency 'gobject-introspection-1.0' is required but not found.
+        sudo apt install libgirepository1.0-dev
+
+        #./pip3.* install PyGObject
         ./pip3.* install PyGObject==3.50.0
 
         ./pip3.* install Solaar
