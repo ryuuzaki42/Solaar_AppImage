@@ -52,6 +52,8 @@ jobs:
         # ERROR: Dependency "dbus-1" not found
         sudo apt-get install libdbus-1-dev
 
+        ./pip3.* install PyGObject==3.50.0
+
         ./pip3.* install Solaar
 
         ./pip3.* install typing_extensions
