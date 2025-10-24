@@ -58,6 +58,9 @@ jobs:
         #./pip3.* install PyGObject
         ./pip3.* install PyGObject==3.50.0
 
+        # 
+        sudo apt install libffi7
+
         ./pip3.* install Solaar
 
         ./pip3.* install typing_extensions
