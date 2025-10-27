@@ -71,9 +71,10 @@ jobs:
 
     - name: Make AppImage
       run: |
-        version_Solaar="1.1.14"
-
         set -x
+        version_Solaar="1.1.16"
+        echo "Solaar version: $version"
+
         cd squashfs-root/
         pwd; ls -lah
 
