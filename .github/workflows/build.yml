@@ -52,8 +52,9 @@ jobs:
 
         # libffi.so.8 not found
         #sudo apt remove libffi8
-        sudo dpkg --force-all -P libffi8
-        sudo apt-get -f install
+        #sudo dpkg --force-all -P libffi8
+        #sudo apt-get -f install
+        rm /usr/lib/x86_64-linux-gnu/libffi.so.*
 
         # ERROR: Dependency "dbus-1" not found
         sudo apt install libdbus-1-dev
@@ -65,9 +66,9 @@ jobs:
         ./pip3.* install PyGObject==3.50.0
 
         # ImportError: libffi.so.8: cannot open shared object file: No such file or directory
-        find /usr/ | grep libffi.so.
-        cp /usr/lib/x86_64-linux-gnu/libffi.so.* ../../../usr/lib/
-        ls -lah ../../../usr/lib/
+        #find /usr/ | grep libffi.so.
+        #cp /usr/lib/x86_64-linux-gnu/libffi.so.* ../../../usr/lib/
+        #ls -lah ../../../usr/lib/
 
         ./pip3.* install cffi
 
@@ -80,7 +81,7 @@ jobs:
     - name: Make AppImage
       run: |
         set -x
-        version_Solaar="1.1.16"
+        version_Solaar="1.1.17"
         echo "Solaar version: $version"
 
         cd squashfs-root/
