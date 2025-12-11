@@ -52,7 +52,6 @@ jobs:
 
         # libffi.so.8 not found
         #sudo apt remove libffi8
-        sudo dpkg -P libffi8
         sudo dpkg --force-all -P libffi8
         sudo apt-get -f install
 
