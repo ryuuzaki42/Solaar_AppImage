@@ -51,10 +51,8 @@ jobs:
         pwd; ls -lah
 
         # libffi.so.8 not found
-        #sudo apt remove libffi8
-        #sudo dpkg --force-all -P libffi8
-        #sudo apt-get -f install
-        sudo rm /usr/lib/x86_64-linux-gnu/libffi.so.*
+        #sudo rm /usr/lib/x86_64-linux-gnu/libffi.so.*
+        #./pip3.* install cffi
 
         # ERROR: Dependency "dbus-1" not found
         sudo apt install libdbus-1-dev
@@ -69,8 +67,6 @@ jobs:
         #find /usr/ | grep libffi.so.
         #cp /usr/lib/x86_64-linux-gnu/libffi.so.* ../../../usr/lib/
         #ls -lah ../../../usr/lib/
-
-        ./pip3.* install cffi
 
         ./pip3.* install Solaar
 
