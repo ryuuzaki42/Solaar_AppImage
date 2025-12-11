@@ -52,6 +52,9 @@ jobs:
 
         # libffi.so.8 not found
         sudo apt remove libffi8
+        dpkg -P libffi8
+        dpkg --force-all -P libffi8
+        apt-get -f install
 
         # ERROR: Dependency "dbus-1" not found
         sudo apt install libdbus-1-dev
