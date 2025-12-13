@@ -78,7 +78,7 @@ jobs:
       run: |
         set -x
         version_Solaar="1.1.18"
-        echo "Solaar version: $version"
+        echo "Solaar version: $version_Solaar"
 
         cd squashfs-root/
         pwd; ls -lah
