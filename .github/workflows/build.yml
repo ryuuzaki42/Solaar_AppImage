@@ -101,8 +101,19 @@ jobs:
 
         pwd; ls -lah
 
+        cat > AppRun << 'EOF'
+        #!/bin/bash
+        HERE="$(dirname "$(readlink -f "${0}")")"
+
+        cd "$HERE"/opt/python3.*/bin/
+        ./python3.* solaar
+        EOF
+
+        chmod +x AppRun
+        cat AppRun
+
         cd ../
-        mv AppRun squashfs-root/
+        #mv AppRun squashfs-root/
 
         mv README.md squashfs-root/
         ls -lah squashfs-root/
