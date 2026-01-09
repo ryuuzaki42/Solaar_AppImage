@@ -8,7 +8,7 @@
 ---
 https://github.com/pwr-Solaar/Solaar
 
-https://pypi.org/project/Solaar/
+https://pypi.org/project/Solaar
 
 ---
 https://github.com/pwr-Solaar/Solaar/releases
