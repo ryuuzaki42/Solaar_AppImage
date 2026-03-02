@@ -1,5 +1,4 @@
 name: Create new release
-# Test
 
 on:
   push:
@@ -88,36 +87,24 @@ jobs:
 
         #find . | grep ".png"
         #find . | grep ".svg"
-        #mv python.png Solaar.png 
+        rm python.png
         cp opt/python3.9/share/icons/hicolor/scalable/apps/solaar.svg .
 
         #find . | grep ".desktop"
-        #mv python*.desktop Solaar.desktop
         rm python*.desktop
         cp opt/python3.9/share/applications/solaar.desktop .
         cat solaar.desktop
-
-        #sed -i "s/Name=.*/Name=Solaar-$version_Solaar/" Solaar.desktop
-        #sed -i "s/Name=.*/Name=Solaar/" Solaar.desktop
-        #sed -i "s/Icon=python/Icon=Solaar/" Solaar.desktop
-        #cat Solaar.desktop
-
         pwd; ls -lah
 
-        cat > AppRun << 'EOF'
-        #!/bin/bash
+        echo '#!/bin/bash
         HERE="$(dirname "$(readlink -f "${0}")")"
 
         cd "$HERE"/opt/python3.*/bin/
-        ./python3.* solaar
-        EOF
-
+        ./python3.* solaar' > AppRun
         chmod +x AppRun
         cat AppRun
 
         cd ../
-        #mv AppRun squashfs-root/
-
         mv README.md squashfs-root/
         ls -lah squashfs-root/
 
