@@ -98,9 +98,9 @@ jobs:
         cat solaar.desktop
 
         #sed -i "s/Name=.*/Name=Solaar-$version_Solaar/" Solaar.desktop
-        sed -i "s/Name=.*/Name=Solaar/" Solaar.desktop
-        sed -i "s/Icon=python/Icon=Solaar/" Solaar.desktop
-        cat Solaar.desktop
+        #sed -i "s/Name=.*/Name=Solaar/" Solaar.desktop
+        #sed -i "s/Icon=python/Icon=Solaar/" Solaar.desktop
+        #cat Solaar.desktop
 
         pwd; ls -lah
 
