@@ -88,11 +88,14 @@ jobs:
 
         #find . | grep ".png"
         #find . | grep ".svg"
-        mv python.png Solaar.png
+        #mv python.png Solaar.png 
+        cp opt/python3.9/share/icons/hicolor/scalable/apps/solaar.svg .
 
         #find . | grep ".desktop"
-        mv python*.desktop Solaar.desktop
-        cat Solaar.desktop
+        #mv python*.desktop Solaar.desktop
+        rm python*.desktop
+        cp opt/python3.9/share/applications/solaar.desktop
+        cat solaar.desktop
 
         #sed -i "s/Name=.*/Name=Solaar-$version_Solaar/" Solaar.desktop
         sed -i "s/Name=.*/Name=Solaar/" Solaar.desktop
