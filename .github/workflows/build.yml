@@ -17,7 +17,7 @@ jobs:
     # ubuntu-latest or 22.04 will require GLIBC_2.34
 
     steps:
-    - uses: actions/checkout@main
+    - uses: actions/checkout@v6
     - name: Install fuse and libfuse2
       run: sudo apt install fuse libfuse2
 
@@ -88,11 +88,11 @@ jobs:
         #find . | grep ".png"
         #find . | grep ".svg"
         rm python.png
-        cp opt/python3.9/share/icons/hicolor/scalable/apps/solaar.svg .
+        ln -s opt/python3.9/share/icons/hicolor/scalable/apps/solaar.svg .
 
         #find . | grep ".desktop"
         rm python*.desktop
-        cp opt/python3.9/share/applications/solaar.desktop .
+        ln -s opt/python3.9/share/applications/solaar.desktop .
         cat solaar.desktop
         pwd; ls -lah
 
@@ -105,7 +105,7 @@ jobs:
         cat AppRun
 
         cd ../
-        mv README.md squashfs-root/
+        cp README.md squashfs-root/
         ls -lah squashfs-root/
 
         # Wrong permissions on AppDir, please set it to 0755 and try again
@@ -120,20 +120,13 @@ jobs:
         md5sum "$fileName" > "${fileName}.md5"
         pwd; ls -lah
 
-    # Build - Error: Resource not accessible by integration
-    # Change Settings -> Actions -> General -> Workflow Permissions to allow read and write:
-    # https://github.com/actions/first-interaction/issues/10#issuecomment-1506118886
-
     # https://github.com/marketplace/actions/upload-to-github-release
-    - uses: xresloader/upload-to-github-release@main
+    - uses: xresloader/upload-to-github-release@v1
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
           file: "Solaar*.AppImage; Solaar*.zsync; Solaar*.md5"
-          #delete_file: "random-name-*.txt;random-*.txt"
-          release_id: ${{ steps.create_release.outputs.id }}
           #overwrite: true
           verbose: true
-          #tags: true
           draft: false
           default_release_name: "Solaar V in AppImage"
