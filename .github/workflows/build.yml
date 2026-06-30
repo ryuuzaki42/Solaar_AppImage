@@ -74,8 +74,9 @@ jobs:
     - name: Make AppImage
       run: |
         set -x
-        version_Solaar="1.1.19" # Built locally
-        echo "Solaar version: $version_Solaar"
+        tag=1 #1
+        version=$(grep -o "Solaar:.*" README.md | cut -d ' ' -f2)
+        echo "Solaar version: $version - Tag: $tag"
 
         cd squashfs-root/
         pwd; ls -lah
@@ -110,7 +111,7 @@ jobs:
         chmod 0755 squashfs-root/
 
         #ARCH=x86_64 ./appimagetool-x86_64.AppImage squashfs-root/
-        ARCH=x86_64 VERSION="${version_Solaar}-1_JB" ./appimagetool-x86_64.AppImage squashfs-root/
+        ARCH=x86_64 VERSION="${version}-1_JB" ./appimagetool-x86_64.AppImage squashfs-root/
         pwd; ls -lah
 
         fileName=$(ls Solaar*.AppImage)
