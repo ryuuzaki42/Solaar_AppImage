@@ -6,7 +6,7 @@ Solaar is a Linux manager for many Logitech keyboards, mice, and other devices t
 https://github.com/pwr-Solaar/Solaar
 
 ## Repository: https://github.com/ryuuzaki42/Solaar_AppImage
-    Solaar: 1.1.19
+    Solaar: 1.1.20
 
 ## Notice
 Need to be run as root to change Logitech Unifying 
